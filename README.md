@@ -12,6 +12,17 @@ This project is a **Cloud Run Job** deployed in a **Tier-1 region (us-central1)*
 - **Low maintenance**: No more manually pasting 100+ IP ranges until your hands hurt.
 - **Secure**: Strictly enforces Cloudflare-only access to your Load Balancer, effectively ghosting direct-to-IP attackers.
 
+---
+
+## 🌐 The IPv6 Manifesto (Why only IPv6?)
+Our company is strictly **IPv6-only** for this project. This isn't just a technical choice; it's a statement driven by three cold, hard facts:
+
+1. **Vibe Check**: Honestly? IPv6 just looks cooler. It's the "cyberpunk" of IP addresses.
+2. **Financial Reality**: IPv6 is the future, and more importantly, it's the "free" part of the future. We are budget ninjas.
+3. **Cloud Armor Constraints**: Cloudflare's IPv4 list is massive (way more than 10 ranges). **Google Cloud Armor has a hard limit of 10 IP ranges per rule.** To avoid creating multiple rules (which complicates management and adds unnecessary overhead), we sync the compact IPv6 list into a single, elegant rule. One rule to rule them all.
+
+---
+
 ### 🛠️ Tech Stack
 - **Bash & Gcloud CLI**: Why compile Go when a shell script does the job? (Switched to Bash for maximum simplicity).
 - **Docker (Slim)**: Using the official Google Cloud CLI slim image to keep things light.
