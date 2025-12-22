@@ -13,7 +13,7 @@ This project is a **Cloud Run Job** deployed in a **Tier-1 region (us-central1)*
 - **Secure**: Strictly enforces Cloudflare-only access to your Load Balancer, effectively ghosting direct-to-IP attackers.
 
 > [!IMPORTANT]
-> **2025-12-22 Update:** As of now, the minimum memory allocation for Cloud Run Jobs has been raised to **512MiB**. But we’ve updated our deployment specs accordingly to comply with Google’s new floor while still keeping costs at a literal $0.00. ~~Fuck~~Nice try, Google
+> **2025-12-22 Update:** As of now, the minimum memory allocation for Cloud Run Jobs has been raised to **512MiB**. But we’ve updated our deployment specs accordingly to comply with Google’s new floor while still keeping costs at a literal $0.00. Nice try, Google
 
 ---
 
