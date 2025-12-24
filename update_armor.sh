@@ -39,6 +39,7 @@ if [ $? -eq 0 ]; then
     echo "🎉 SUCCESS: Cloud Armor rule has been updated!"
     echo "🔒 Your Origin is now protected by Cloudflare IPs."
     echo "----------------------------------------------------------"
+    exit 0
 else
     echo "----------------------------------------------------------"
     echo "❌ FAILED: Update failed."
