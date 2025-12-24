@@ -67,19 +67,38 @@ This container is generalized. You don't need to hardcode anything; just pass th
 
 ## 🔐 Security & IAM Setup
 
-To make this work securely, you need a dedicated **Service Account**. Don't use your Owner account!
+To make this work securely, you need a dedicated **Service Account**. Using a Service Account instead of your personal Owner account ensures the principle of least privilege.
 
-1. **Create the Service Account:**
-   ```bash
+### 1. Create the Service Account
+
+```bash
+   # Set your Project ID variable
+   export PROJECT_ID="YOUR_PROJECT_ID"
+   
+   # Create the dedicated Service Account
    gcloud iam service-accounts create armor-updater-sa \
-       --display-name="Cloud Armor Auto Updater"
-   ```
+    --display-name="Cloud Armor Auto Updater"
+```
 
-2. **Assign the "Compute Security Admin" Role:**
+### 2. Assign Required IAM Roles
+The add-iam-policy-binding command only supports adding one role at a time. You must run the command twice to assign both necessary roles.
+
    ```bash
-   gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
-       --member="serviceAccount:armor-updater-sa@YOUR_PROJECT_ID.iam.gserviceaccount.com" \
+   # Set the Service Account Email variable for convenience
+   export SA_EMAIL="armor-updater-sa@${PROJECT_ID}.iam.gserviceaccount.com"
+   
+   # A. Assign the "Compute Security Admin" Role
+   # Allows the SA to create, modify, and delete Cloud Armor security policies.
+   gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+       --member="serviceAccount:${SA_EMAIL}" \
        --role="roles/compute.securityAdmin"
+   
+   # B. Assign the "Service Account User" Role
+   # Allows the SA to act as the service account identity when attaching 
+   # policies to backend resources.
+   gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+       --member="serviceAccount:${SA_EMAIL}" \
+       --role="roles/iam.serviceAccountUser"
    ```
 
 ## 🤖 Continuous Integration (Cloud Build)
@@ -125,4 +144,3 @@ We use Cloud Build to automatically build the image on every git push.
 
 ## 📝 License
 MIT. Go forth and save that $3,000.
-
